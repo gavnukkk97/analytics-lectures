@@ -67,7 +67,7 @@ title: Итоговый проект — мини-исследование ры�
 
 ## Практика
 
-Датасет и стартовый ноутбук капстоуна будут опубликованы финальным блоком курса (синтетика: регистрации/заказы/пилот/open-ends/решётка; seed для воспроизводимости).
+Датасет капстоуна: [course/capstone/](../../capstone/) — registrations.csv, orders.csv (с гео-пилотом), open_ends.csv, grid.csv (генерация: `python3 course/capstone/generate_capstone.py`). Эталонные числа для ревьюера — [solutions/check.py](../../capstone/solutions/check.py).
 
 ## Домашнее задание (подготовка)
 
