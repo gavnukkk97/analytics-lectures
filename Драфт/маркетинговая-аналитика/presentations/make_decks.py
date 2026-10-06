@@ -15,7 +15,7 @@ from pptx.enum.text import PP_ALIGN
 BG, PRIMARY, ACCENT, MUTED, LIGHT = "FFFFFF", "1F2A44", "E8590C", "6B7280", "F4F5F7"
 FONT = "Arial"
 W, H, M = 13.33, 7.5, 0.6
-OUT = Path(__file__).resolve().parent
+OUT = Path(__file__).resolve().parents[1] / "presentations_neutral"
 
 def _tf(slide, x, y, w, h, text, size=20, color='333333', bold=False, align=PP_ALIGN.LEFT, font=FONT):
     box = slide.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(h))

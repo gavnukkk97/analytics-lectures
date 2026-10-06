@@ -27,7 +27,7 @@ sys.path.insert(0, str(HERE))
 from make_decks import DECKS  # контент уроков
 
 BASE = next(iter(sorted(HERE.glob("x5_base.pptx"))), None) or Path("/tmp/x5_base.pptx")
-OUT = BASE.parent / "presentations_x5" if BASE != Path("/tmp/x5_base.pptx") else HERE.parent / "presentations_x5"
+OUT = HERE.parent / "presentations"
 OUT.mkdir(exist_ok=True)
 
 NAVY, ORANGE = "0E2841", "E97132"
