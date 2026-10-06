@@ -7,3 +7,9 @@
 
 # черновики-исходники (локальные конспекты) не публикуются
 materials/
+
+# X5: бренд-материалы не публикуются (собираются локально из шаблона)
+x5_base.pptx
+presentations/x5_base.pptx
+presentations/presentations_x5/
+presentations_x5/
