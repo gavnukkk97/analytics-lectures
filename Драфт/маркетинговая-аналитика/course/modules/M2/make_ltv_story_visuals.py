@@ -104,7 +104,7 @@ fig.tight_layout(); save(fig, "ltv_story_04_base_vs_cohort.png")
 # 5. Когортный метод за 4 шага
 # ============================================================
 fig, axes = plt.subplots(2, 2, figsize=(10.5, 6.4))
-profit_m = np.array([120, 65, 50, 41, 35, 31, 28, 26, 24, 23, 22, 21])  # тыс ₽ маржи когорты
+profit_m = np.array([320, 180, 145, 90, 70, 60, 52, 47, 43, 40, 38, 36])  # тыс ₽ маржи когорты (LTV3=645, LTV12≈1120)
 n = 1000
 a = axes[0, 0]
 a.bar(np.arange(1, 13), profit_m, color=C_MAIN)
@@ -119,8 +119,9 @@ b.set_xlabel("месяц жизни"); b.set_ylabel("Σ маржи, тыс ₽")
 c = axes[1, 0]
 c.plot(np.arange(1, 13), cum / n * 1000, lw=2.5, color=C_TRUE)
 c.scatter([3], [cum[2] / n * 1000], s=70, color=C_ACC, zorder=5)
-c.annotate(f"LTV3 = {cum[2]} ₽", (3, cum[2]), xytext=(4.5, cum[2] - 180),
-           color=C_ACC, fontweight="bold", fontsize=10)
+c.annotate(f"LTV3 = {cum[2]} ₽", xy=(3, cum[2]), xytext=(5.2, cum[2] - 220),
+           color=C_ACC, fontweight="bold", fontsize=10,
+           arrowprops=dict(arrowstyle="->", color=C_ACC, lw=1.5))
 c.set_title("Шаг 4. Делим на размер когорты → кривая LTV")
 c.set_xlabel("месяц жизни"); c.set_ylabel("LTV, ₽/юзер")
 d = axes[1, 1]
