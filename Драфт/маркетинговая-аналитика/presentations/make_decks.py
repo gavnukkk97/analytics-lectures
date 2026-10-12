@@ -652,7 +652,8 @@ DECKS_M567 = [
 
 DECKS = DECKS + DECKS_M567
 
-for num, title, subtitle, opener, slides, hw in DECKS:
-    p = build(num, title, subtitle, opener, slides, hw)
-    print("ok", p.name)
-print("Готово:", len(DECKS), "презентаций в", OUT)
+if __name__ == "__main__":
+    for num, title, subtitle, opener, slides, hw in DECKS:
+        p = build(num, title, subtitle, opener, slides, hw)
+        print("ok", p.name)
+    print("Готово:", len(DECKS), "презентаций в", OUT)
