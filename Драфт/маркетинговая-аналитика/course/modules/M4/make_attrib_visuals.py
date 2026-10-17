@@ -236,3 +236,82 @@ ax.set_title("Симуляция 3 · мало данных: ML скачет —
 fig.tight_layout(); save(fig, "attrib_06_sim_smalldata.png")
 
 print("Готово: 6 картинок в", OUT)
+
+# ============================================================
+# 7. Слои сшивки сквозной аналитики (4.1)
+# ============================================================
+fig, ax = plt.subplots(figsize=(10, 4.8))
+layers = [
+    ("Рекламные кабинеты", "показы · клики · расходы", "кампания + день", NAVY),
+    ("Веб / приложение", "сессии · события · поведение", "cookie · device_id · yclid", GREEN),
+    ("Аккаунт", "авторизация / регистрация", "user_id — главный ключ", ORANGE),
+    ("CRM", "сделки · оплаты", "user_id · email · телефон", GREEN),
+    ("ЮНИТ-ТАБЛИЦА", "касания + заказы + выручка + LTV", "одна строка = один юзер", NAVY),
+]
+for i, (name, what, key, c) in enumerate(layers):
+    y = 0.82 - i * 0.21
+    ax.add_patch(plt.Rectangle((0.05, y - 0.085), 0.62, 0.17, fc=c, alpha=0.16, ec=c, lw=2.2))
+    ax.text(0.08, y + 0.025, name, fontsize=11.5, fontweight="bold", color=c, va="center")
+    ax.text(0.08, y - 0.048, what, fontsize=9, color="#5a6b7d", va="center")
+    ax.text(0.70, y, "ключ: " + key, fontsize=9.5, color="#16324a", va="center", bbox=BB)
+    if i < 4:
+        ax.annotate("", xy=(0.36, y - 0.095), xytext=(0.36, y - 0.118),
+                    arrowprops=dict(arrowstyle="-|>", lw=2, color=GREY))
+ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off"); ax.grid(False)
+ax.set_title("Сквозная аналитика: сшиваем слои до user_id")
+fig.tight_layout(); save(fig, "attrib_07_layers.png")
+
+# ============================================================
+# 8. Один путь — пять мнений (4.2)
+# ============================================================
+fig, ax = plt.subplots(figsize=(10, 4.2))
+touches = [(1.0, "медийка", GREY), (3.2, "контекст", NAVY),
+           (5.4, "email", GREEN), (7.6, "бренд", ORANGE)]
+ax.axhline(0.30, color="#c9d2da", lw=2, zorder=1)
+for x, name, c in touches:
+    ax.scatter([x], [0.30], s=420, color=c, edgecolor="white", lw=2.5, zorder=5)
+    ax.text(x, 0.17, name, ha="center", fontsize=11, fontweight="bold", color=c)
+ax.scatter([9.6], [0.30], s=620, marker="*", color=RED, edgecolor="white", lw=1.5, zorder=6)
+ax.text(9.6, 0.17, "заказ 1 180 ₽", ha="center", fontsize=11, fontweight="bold", color=RED)
+claims = [
+    ("first-click: всё медийке", 1.0, 3.2, NAVY, 0.88),
+    ("last-click: всё бренду", 7.6, 9.6, ORANGE, 0.88),
+    ("linear: по 25% каждому", 1.0, 9.6, GREEN, 0.70),
+]
+for label, x0, x1, c, y in claims:
+    ax.annotate("", xy=(x0, y - 0.028), xytext=(x1, y - 0.028),
+                arrowprops=dict(arrowstyle="<->", color=c, lw=1.8))
+    ax.text((x0 + x1) / 2, y + 0.012, label, ha="center", fontsize=10,
+            color=c, fontweight="bold", bbox=BB)
+ax.set_xlim(0.2, 10.6); ax.set_ylim(0.10, 1.0)
+ax.set_yticks([]); ax.set_xticks([])
+ax.set_xlabel("путь пользователя во времени →", fontsize=10)
+ax.grid(False)
+ax.set_title("Один путь — пять мнений о том, кто заработал заказ")
+fig.tight_layout(); save(fig, "attrib_08_path.png")
+
+# ============================================================
+# 9. Юнит-таблица: пример строк (4.1)
+# ============================================================
+fig, ax = plt.subplots(figsize=(10, 3.4))
+cols = ["user_id", "полный путь касаний", "заказы", "выручка", "LTV12"]
+rows = [
+    ["1001", "медийка → контекст → бренд", "3", "4 360 ₽", "1 090 ₽"],
+    ["1002", "контекст", "1", "1 180 ₽", "410 ₽"],
+    ["1003", "ТВ? → direct (разметки нет)", "2", "2 540 ₽", "830 ₽"],
+]
+tbl = ax.table(cellText=rows, colLabels=cols, cellLoc="left", loc="center",
+               colWidths=[0.11, 0.37, 0.10, 0.14, 0.13])
+tbl.auto_set_font_size(False); tbl.set_fontsize(10.5); tbl.scale(1, 2.0)
+for j in range(len(cols)):
+    tbl[0, j].set_facecolor(NAVY)
+    tbl[0, j].get_text().set_color("white")
+    tbl[0, j].get_text().set_fontweight(True)
+for i in range(1, len(rows) + 1):
+    for j in range(len(cols)):
+        tbl[i, j].set_edgecolor("#c9d2da")
+ax.axis("off"); ax.grid(False)
+ax.set_title("Юнит-таблица: один юзер — одна строка — вся история")
+fig.tight_layout(); save(fig, "attrib_09_unit_table.png")
+
+print("Готово: 9 картинок в", OUT)
